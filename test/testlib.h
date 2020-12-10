@@ -16,6 +16,7 @@
 #include <cassert>
 #include <cmath>
 #include <csignal>
+#include <exception>
 #include <functional>
 #include <fcntl.h>
 #include <iostream>
@@ -200,6 +201,10 @@ static inline bool isZero(double x) {
 #define TESTLIB_ASSERT_EQUALS_FAILURE_MESSAGE(expected, actual)                                                        \
     std::cerr << "\tEXPECTED : " << (expected) << '\n'                                                                 \
               << "\tACTUAL   : " << (actual)   << '\n'
+
+/** Helper macro for printing message on uncaught exception in test. **/
+#define TESTLIB_UNCAUGHT_EXCEPTION_MESSAGE(exception)                                                                  \
+    std::cerr << "\tUNCAUGHT EXCEPTION : " << typeid(exception).name() << ": " << (exception).what() << '\n'           \
 
 //----------------------------------------------------------------------------------------------------------------------
 

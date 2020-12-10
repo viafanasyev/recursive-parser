@@ -107,7 +107,15 @@ bool TestRunner::runTest(Test* test) {
 
     _currentTest = test;
 
-    test->run();
+    try {
+        test->run();
+    } catch (const std::exception& e) {
+        std::cerr << TESTLIB_ANSI_COLOR_RED;
+        std::cerr << "[ASSERTION FAILED] " << test->fileName() << ':' << test->line() << '\n';
+        TESTLIB_UNCAUGHT_EXCEPTION_MESSAGE(e);
+        std::cerr << TESTLIB_ANSI_COLOR_RESET;
+        return false;
+    }
 
     if (_currentTest != nullptr) {
         _currentTest = nullptr;
