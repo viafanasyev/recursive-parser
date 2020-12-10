@@ -8,9 +8,11 @@ This program can parse and evaluate mathematical expressions with simple operati
 ### Structure
 
 * src/ : Main project
+    * calculator.h, calculator.cpp : Definition and implementation of calculator that uses recursive parser;
     * main.cpp : Entry point for the program.
 
 * test/ : Tests and testing library
+    * calculator_tests.cpp : Tests for recursive parser calculator
     * testlib.h, testlib.cpp : Library for testing with assertions and helper macros;
     * main.cpp : Entry point for tests. Just runs all tests.
 
@@ -20,9 +22,9 @@ This program can parse and evaluate mathematical expressions with simple operati
 
 ### Run
 
-#### Recursive parser
+#### Calculator
 
-To run main program execute next commands in terminal:
+To calculate mathematical expression execute next commands in terminal:
 ```shell script
 cmake . && make
 ./eval "20 + 30 - 10 * (4 + 3 * 7)"

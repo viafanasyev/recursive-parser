@@ -79,6 +79,7 @@ $(function() {
 <div class="textblock"><code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;cmath&gt;</code><br />
 <code>#include &lt;csignal&gt;</code><br />
+<code>#include &lt;exception&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
@@ -118,6 +119,8 @@ Macros</h2></td></tr>
 <tr class="separator:a06c1d086c6645f3a4c71bdff6db3ff66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf1c68451f41d73653199ef83b4b1074"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testlib_8h.html#abf1c68451f41d73653199ef83b4b1074">TESTLIB_ASSERT_EQUALS_FAILURE_MESSAGE</a>(expected,  actual)</td></tr>
 <tr class="separator:abf1c68451f41d73653199ef83b4b1074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58f5e11e42d444ded8d9f24a765a9f2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testlib_8h.html#ad58f5e11e42d444ded8d9f24a765a9f2">TESTLIB_UNCAUGHT_EXCEPTION_MESSAGE</a>(exception)&#160;&#160;&#160;std::cerr &lt;&lt; &quot;\tUNCAUGHT EXCEPTION : &quot; &lt;&lt; typeid(exception).name() &lt;&lt; &quot;: &quot; &lt;&lt; (exception).what() &lt;&lt; '\n'           \</td></tr>
+<tr class="separator:ad58f5e11e42d444ded8d9f24a765a9f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9244bfbda562e8b798789b001993fa5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testlib_8h.html#ae9244bfbda562e8b798789b001993fa5">ASSERT_TRUE</a>(condition)&#160;&#160;&#160;<a class="el" href="testlib_8h.html#abf80da56d1d25ea55beea997960ff2ae">ASSERT_TRUE_WITH_FAILURE</a>(condition, )</td></tr>
 <tr class="separator:ae9244bfbda562e8b798789b001993fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf80da56d1d25ea55beea997960ff2ae"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="testlib_8h.html#abf80da56d1d25ea55beea997960ff2ae">ASSERT_TRUE_WITH_FAILURE</a>(condition,  onFailure)&#160;&#160;&#160;if (!(condition)) <a class="el" href="testlib_8h.html#a17f8ea0df49d4709f5de8bb764d2d2bf">TESTLIB_ASSERT_FAILED</a>(onFailure)</td></tr>
@@ -608,6 +611,25 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
+<a id="ad58f5e11e42d444ded8d9f24a765a9f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad58f5e11e42d444ded8d9f24a765a9f2">&#9670;&nbsp;</a></span>TESTLIB_UNCAUGHT_EXCEPTION_MESSAGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TESTLIB_UNCAUGHT_EXCEPTION_MESSAGE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">exception</td><td>)</td>
+          <td>&#160;&#160;&#160;std::cerr &lt;&lt; &quot;\tUNCAUGHT EXCEPTION : &quot; &lt;&lt; typeid(exception).name() &lt;&lt; &quot;: &quot; &lt;&lt; (exception).what() &lt;&lt; '\n'           \</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Helper macro for printing message on uncaught exception in test. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a26f42fe409ceef9342106ce8d61d2ab1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26f42fe409ceef9342106ce8d61d2ab1">&#9670;&nbsp;</a></span>TestPtr</h2>
@@ -625,13 +647,13 @@ Typedefs</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="atestlib_8h_html_a3e8ea953365265f6627605afbde9ba70"><div class="ttname"><a href="testlib_8h.html#a3e8ea953365265f6627605afbde9ba70">TEST_NAME</a></div><div class="ttdeci">#define TEST_NAME(group, name)</div><div class="ttdef"><b>Definition:</b> testlib.h:141</div></div>
-<div class="ttc" id="atestlib_8h_html_abf80da56d1d25ea55beea997960ff2ae"><div class="ttname"><a href="testlib_8h.html#abf80da56d1d25ea55beea997960ff2ae">ASSERT_TRUE_WITH_FAILURE</a></div><div class="ttdeci">#define ASSERT_TRUE_WITH_FAILURE(condition, onFailure)</div><div class="ttdef"><b>Definition:</b> testlib.h:213</div></div>
+<div class="ttc" id="atestlib_8h_html_a3e8ea953365265f6627605afbde9ba70"><div class="ttname"><a href="testlib_8h.html#a3e8ea953365265f6627605afbde9ba70">TEST_NAME</a></div><div class="ttdeci">#define TEST_NAME(group, name)</div><div class="ttdef"><b>Definition:</b> testlib.h:142</div></div>
+<div class="ttc" id="atestlib_8h_html_abf80da56d1d25ea55beea997960ff2ae"><div class="ttname"><a href="testlib_8h.html#abf80da56d1d25ea55beea997960ff2ae">ASSERT_TRUE_WITH_FAILURE</a></div><div class="ttdeci">#define ASSERT_TRUE_WITH_FAILURE(condition, onFailure)</div><div class="ttdef"><b>Definition:</b> testlib.h:218</div></div>
 <div class="ttc" id="aclass_test_runner_html_a06e0d07520d2e392aed9db437885a75c"><div class="ttname"><a href="class_test_runner.html#a06e0d07520d2e392aed9db437885a75c">TestRunner::addTest</a></div><div class="ttdeci">Test * addTest(TestPtr testPtr, const char *fileName, unsigned int line)</div><div class="ttdef"><b>Definition:</b> testlib.cpp:58</div></div>
-<div class="ttc" id="atestlib_8h_html_abf1c68451f41d73653199ef83b4b1074"><div class="ttname"><a href="testlib_8h.html#abf1c68451f41d73653199ef83b4b1074">TESTLIB_ASSERT_EQUALS_FAILURE_MESSAGE</a></div><div class="ttdeci">#define TESTLIB_ASSERT_EQUALS_FAILURE_MESSAGE(expected, actual)</div><div class="ttdef"><b>Definition:</b> testlib.h:200</div></div>
-<div class="ttc" id="atestlib_8h_html_a6f9bfa46a963a63e89c25b399dc6a3b7"><div class="ttname"><a href="testlib_8h.html#a6f9bfa46a963a63e89c25b399dc6a3b7">TEST_INFO</a></div><div class="ttdeci">#define TEST_INFO(group, name)</div><div class="ttdef"><b>Definition:</b> testlib.h:143</div></div>
-<div class="ttc" id="aclass_test_html"><div class="ttname"><a href="class_test.html">Test</a></div><div class="ttdef"><b>Definition:</b> testlib.h:40</div></div>
-<div class="ttc" id="aclass_test_runner_html_ab92ba345c5bc9c3e5284aca8f6961cd9"><div class="ttname"><a href="class_test_runner.html#ab92ba345c5bc9c3e5284aca8f6961cd9">TestRunner::getInstance</a></div><div class="ttdeci">static TestRunner * getInstance()</div><div class="ttdef"><b>Definition:</b> testlib.cpp:144</div></div>
+<div class="ttc" id="atestlib_8h_html_abf1c68451f41d73653199ef83b4b1074"><div class="ttname"><a href="testlib_8h.html#abf1c68451f41d73653199ef83b4b1074">TESTLIB_ASSERT_EQUALS_FAILURE_MESSAGE</a></div><div class="ttdeci">#define TESTLIB_ASSERT_EQUALS_FAILURE_MESSAGE(expected, actual)</div><div class="ttdef"><b>Definition:</b> testlib.h:201</div></div>
+<div class="ttc" id="atestlib_8h_html_a6f9bfa46a963a63e89c25b399dc6a3b7"><div class="ttname"><a href="testlib_8h.html#a6f9bfa46a963a63e89c25b399dc6a3b7">TEST_INFO</a></div><div class="ttdeci">#define TEST_INFO(group, name)</div><div class="ttdef"><b>Definition:</b> testlib.h:144</div></div>
+<div class="ttc" id="aclass_test_html"><div class="ttname"><a href="class_test.html">Test</a></div><div class="ttdef"><b>Definition:</b> testlib.h:41</div></div>
+<div class="ttc" id="aclass_test_runner_html_ab92ba345c5bc9c3e5284aca8f6961cd9"><div class="ttname"><a href="class_test_runner.html#ab92ba345c5bc9c3e5284aca8f6961cd9">TestRunner::getInstance</a></div><div class="ttdeci">static TestRunner * getInstance()</div><div class="ttdef"><b>Definition:</b> testlib.cpp:152</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
