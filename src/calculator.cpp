@@ -36,22 +36,22 @@ int SyntaxError::at() const noexcept {
     return position;
 }
 
-int getExpression(const char* expression, int& pos);
+double getExpression(const char* expression, int& pos);
 
-int getTerm(const char* expression, int& pos);
+double getTerm(const char* expression, int& pos);
 
-int getFactor(const char* expression, int& pos);
+double getFactor(const char* expression, int& pos);
 
-int getParenthesised(const char* expression, int& pos);
+double getParenthesised(const char* expression, int& pos);
 
 int getNumber(const char* expression, int& pos);
 
 void skipSpaces(const char* expression, int& pos);
 
-int eval(const char* expression) {
+double eval(const char* expression) {
     int pos = 0;
     skipSpaces(expression, pos);
-    int result = getExpression(expression, pos);
+    double result = getExpression(expression, pos);
     if (expression[pos] != '\0') {
         throw SyntaxError(pos, "Invalid symbol");
     }
@@ -59,10 +59,10 @@ int eval(const char* expression) {
     return result;
 }
 
-int getExpression(const char* expression, int& pos) {
-    int result = getTerm(expression, pos);
+double getExpression(const char* expression, int& pos) {
+    double result = getTerm(expression, pos);
     skipSpaces(expression, pos);
-    int term = 0;
+    double term = NAN;
     char op = 0;
     while (expression[pos] == '+' || expression[pos] == '-') {
         op = expression[pos++];
@@ -76,10 +76,10 @@ int getExpression(const char* expression, int& pos) {
     return result;
 }
 
-int getTerm(const char* expression, int& pos) {
-    int result = getFactor(expression, pos);
+double getTerm(const char* expression, int& pos) {
+    double result = getFactor(expression, pos);
     skipSpaces(expression, pos);
-    int factor = 0;
+    double factor = NAN;
     char op = 0;
     while (expression[pos] == '*' || expression[pos] == '/') {
         op = expression[pos++];
@@ -93,10 +93,10 @@ int getTerm(const char* expression, int& pos) {
     return result;
 }
 
-int getFactor(const char* expression, int& pos) {
-    int result = getParenthesised(expression, pos);
+double getFactor(const char* expression, int& pos) {
+    double result = getParenthesised(expression, pos);
     skipSpaces(expression, pos);
-    int operand = 0;
+    double operand = NAN;
     std::vector<int> operands;
     while (expression[pos] == '^') {
         ++pos;
@@ -118,14 +118,14 @@ int getFactor(const char* expression, int& pos) {
     return result;
 }
 
-int getParenthesised(const char* expression, int& pos) {
+double getParenthesised(const char* expression, int& pos) {
     if (expression[pos] != '(') {
         return getNumber(expression, pos);
     }
     ++pos;
     skipSpaces(expression, pos);
 
-    int result = getExpression(expression, pos);
+    double result = getExpression(expression, pos);
 
     if (expression[pos] != ')') {
         throw SyntaxError(pos, "Expected closing parenthesis");

@@ -28,6 +28,6 @@ public:
     int at() const noexcept;
 };
 
-int eval(const char* expression);
+double eval(const char* expression);
 
 #endif // RECURSIVE_PARSER_CALCULATOR_H

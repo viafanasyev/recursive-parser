@@ -6,32 +6,32 @@
 
 TEST(eval_correctExpression, simpleExpressionWithoutBraces) {
     const char* expression = "2 + 3 * 5";
-    ASSERT_EQUALS(eval(expression), 17);
+    ASSERT_DOUBLE_EQUALS(eval(expression), 17);
 }
 
 TEST(eval_correctExpression, simpleExpressionWithBraces) {
     const char* expression = "(2 + 3) * 5";
-    ASSERT_EQUALS(eval(expression), 25);
+    ASSERT_DOUBLE_EQUALS(eval(expression), 25);
 }
 
 TEST(eval_correctExpression, complexExpressionWithoutBraces) {
     const char* expression = "2 + 3 * 5 - 7 * 20 / 10";
-    ASSERT_EQUALS(eval(expression), 3);
+    ASSERT_DOUBLE_EQUALS(eval(expression), 3);
 }
 
 TEST(eval_correctExpression, complexExpressionWithBraces) {
     const char* expression = "(2 + 3) * (5 - 7) * 20 / 10";
-    ASSERT_EQUALS(eval(expression), -20);
+    ASSERT_DOUBLE_EQUALS(eval(expression), -20);
 }
 
 TEST(eval_correctExpression, simpleExpressionWithPowerOperator) {
     const char* expression = "2 ^ 3 ^ 2";
-    ASSERT_EQUALS(eval(expression), 512);
+    ASSERT_DOUBLE_EQUALS(eval(expression), 512);
 }
 
 TEST(eval_correctExpression, complexExpressionWithPowerOperator) {
     const char* expression = "(2 + 3) ^ (7 - 5) * 20 / 10";
-    ASSERT_EQUALS(eval(expression), 50);
+    ASSERT_DOUBLE_EQUALS(eval(expression), 50);
 }
 
 TEST(eval_invalidExpression, invalidNumberOfOpenBraces) {

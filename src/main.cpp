@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
     }
 
     try {
-        printf("Result = %d\n", eval(argv[1]));
+        printf("Result = %lg\n", eval(argv[1]));
     } catch (const SyntaxError& e) {
         fprintf(stderr, "Syntax error: %s\n", e.what());
         return -1;
