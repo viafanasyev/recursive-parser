@@ -75,6 +75,8 @@ $(function() {
 <p>Implementation of calculator that uses recursive parser.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;cctype&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="calculator_8h_source.html">calculator.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -106,7 +108,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>eval</b> (const char *
 <p>The calculator parses mathematical expressions using next grammar: </p><pre class="fragment">G = E '\0'
 E = T ([+|-] T)*
 T = F ([*|/] F)*
-F = P              # For future '^' operator
+F = P (^ P)*
 P = '(' E ')' | N
 N = [0-9]+
 </pre> </div></div><!-- contents -->

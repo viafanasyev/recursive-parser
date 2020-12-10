@@ -7,12 +7,14 @@
  *     G = E '\0'
  *     E = T ([+|-] T)*
  *     T = F ([*|/] F)*
- *     F = P              # For future '^' operator
+ *     F = P (^ P)*
  *     P = '(' E ')' | N
  *     N = [0-9]+
  *
  */
 #include <cctype>
+#include <cmath>
+#include <vector>
 #include "calculator.h"
 
 SyntaxError::SyntaxError(int position_, const char* cause_) {
@@ -92,7 +94,28 @@ int getTerm(const char* expression, int& pos) {
 }
 
 int getFactor(const char* expression, int& pos) {
-    return getParenthesised(expression, pos);
+    int result = getParenthesised(expression, pos);
+    skipSpaces(expression, pos);
+    int operand = 0;
+    std::vector<int> operands;
+    while (expression[pos] == '^') {
+        ++pos;
+        skipSpaces(expression, pos);
+
+        operand = getParenthesised(expression, pos);
+        skipSpaces(expression, pos);
+
+        operands.push_back(operand);
+    }
+    if (!operands.empty()) { // Calculating right-to-left because '^' is right-associative
+        size_t i = operands.size() - 1;
+        while (i > 0) {
+            operands[i - 1] = pow(operands[i - 1], operands[i]);
+            --i;
+        }
+        result = pow(result, operands[0]);
+    }
+    return result;
 }
 
 int getParenthesised(const char* expression, int& pos) {

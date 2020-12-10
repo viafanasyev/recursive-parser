@@ -3,7 +3,8 @@
 ## Project description
 
 This program is developed as a part of ISP RAS course.  
-This program can parse and evaluate mathematical expressions with simple operations (`+`, `-`, `*`, `/`) and braces.
+This program can parse and evaluate mathematical expressions with braces and next operations: `+`, `-`, `*`, `/`, `^`.  
+Note that `^` operator is right-associative.
 
 ### Structure
 

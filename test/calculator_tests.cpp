@@ -24,6 +24,16 @@ TEST(eval_correctExpression, complexExpressionWithBraces) {
     ASSERT_EQUALS(eval(expression), -20);
 }
 
+TEST(eval_correctExpression, simpleExpressionWithPowerOperator) {
+    const char* expression = "2 ^ 3 ^ 2";
+    ASSERT_EQUALS(eval(expression), 512);
+}
+
+TEST(eval_correctExpression, complexExpressionWithPowerOperator) {
+    const char* expression = "(2 + 3) ^ (7 - 5) * 20 / 10";
+    ASSERT_EQUALS(eval(expression), 50);
+}
+
 TEST(eval_invalidExpression, invalidNumberOfOpenBraces) {
     const char* expression = "(2 + 3 * 5";
     try {
