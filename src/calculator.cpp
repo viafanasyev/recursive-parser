@@ -8,8 +8,9 @@
  *     E = T ([+|-] T)*
  *     T = F ([*|/] F)*
  *     F = P (^ P)*
- *     P = '(' E ')' | N
+ *     P = '(' E ')' | N | ID '(' E ')'
  *     N = [0-9]+
+ *     ID = [a-zA-Z]+
  *
  */
 #include <cctype>
@@ -36,6 +37,45 @@ int SyntaxError::at() const noexcept {
     return position;
 }
 
+SymbolTable::SymbolTable() {
+    addSymbol("sin"); // 0
+    addSymbol("cos"); // 1
+    addSymbol("tg" ); // 2
+    addSymbol("ctg"); // 3
+    addSymbol("ln" ); // 4
+}
+
+void SymbolTable::addSymbol(const char* name) noexcept {
+    symbols[name] = nextSymbolId++;
+}
+
+size_t SymbolTable::getSymbolIdByName(const char* name) const noexcept {
+    if (symbols.count(name) != 0) {
+        return symbols.at(name);
+    } else {
+        return -1UL;
+    }
+}
+
+double SymbolTable::evalFuncById(size_t id, double arg) {
+    switch (id) {
+        case 0:
+            return sin(arg);
+        case 1:
+            return cos(arg);
+        case 2:
+            return tan(arg);
+        case 3:
+            return 1. / tan(arg);
+        case 4:
+            return log(arg);
+        default:
+            throw std::logic_error("Not a function name");
+    }
+}
+
+const SymbolTable symbolTable;
+
 double getExpression(const char* expression, int& pos);
 
 double getTerm(const char* expression, int& pos);
@@ -45,6 +85,8 @@ double getFactor(const char* expression, int& pos);
 double getParenthesised(const char* expression, int& pos);
 
 int getNumber(const char* expression, int& pos);
+
+size_t getId(const char* expression, int& pos);
 
 void skipSpaces(const char* expression, int& pos);
 
@@ -119,8 +161,19 @@ double getFactor(const char* expression, int& pos) {
 }
 
 double getParenthesised(const char* expression, int& pos) {
+    size_t funcId = -1UL;
     if (expression[pos] != '(') {
-        return getNumber(expression, pos);
+        if (isdigit(expression[pos])) {
+            return getNumber(expression, pos);
+        } else if (isalpha(expression[pos])){
+            funcId = getId(expression, pos);
+            skipSpaces(expression, pos);
+            if (expression[pos] != '(') {
+                throw SyntaxError(pos, "Expected open parenthesis");
+            }
+        } else {
+            throw SyntaxError(pos, "Invalid symbol");
+        }
     }
     ++pos;
     skipSpaces(expression, pos);
@@ -132,6 +185,9 @@ double getParenthesised(const char* expression, int& pos) {
     }
     ++pos;
 
+    if (funcId != -1UL) {
+        result = SymbolTable::evalFuncById(funcId, result);
+    }
     return result;
 }
 
@@ -145,6 +201,28 @@ int getNumber(const char* expression, int &pos) {
         throw SyntaxError(pos, "Expected number");
     }
     return result;
+}
+
+size_t getId(const char* expression, int& pos) {
+    int startPos = pos;
+    while (isalpha(expression[pos])) {
+        ++pos;
+    }
+    if (pos == startPos) {
+        throw SyntaxError(pos, "Expected id");
+    }
+
+    char* name = (char*)calloc(pos - startPos + 1, sizeof(char));
+    for (int i = startPos; i < pos; ++i) {
+        name[i - startPos] = expression[i];
+    }
+    size_t id = symbolTable.getSymbolIdByName(name);
+    free(name);
+
+    if (id == -1UL) {
+        throw SyntaxError(startPos, "Invalid id");
+    }
+    return id;
 }
 
 void skipSpaces(const char* expression, int& pos) {

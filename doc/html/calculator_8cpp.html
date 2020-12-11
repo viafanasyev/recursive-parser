@@ -66,7 +66,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">calculator.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -96,12 +97,21 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>getParenthesised</b
 <tr class="memitem:a927abc8dff71d8bb7ecc5137e0cfc457"><td class="memItemLeft" align="right" valign="top"><a id="a927abc8dff71d8bb7ecc5137e0cfc457"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumber</b> (const char *expression, int &amp;pos)</td></tr>
 <tr class="separator:a927abc8dff71d8bb7ecc5137e0cfc457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4def4224813d470bac730ebc879d7e50"><td class="memItemLeft" align="right" valign="top"><a id="a4def4224813d470bac730ebc879d7e50"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getId</b> (const char *expression, int &amp;pos)</td></tr>
+<tr class="separator:a4def4224813d470bac730ebc879d7e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e432a87d6acf0048aafdea2d299c38a"><td class="memItemLeft" align="right" valign="top"><a id="a6e432a87d6acf0048aafdea2d299c38a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>skipSpaces</b> (const char *expression, int &amp;pos)</td></tr>
 <tr class="separator:a6e432a87d6acf0048aafdea2d299c38a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea556453873599bc0558bad64eb3e727"><td class="memItemLeft" align="right" valign="top"><a id="aea556453873599bc0558bad64eb3e727"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>eval</b> (const char *expression)</td></tr>
 <tr class="separator:aea556453873599bc0558bad64eb3e727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a667124dbe39766b903391c6b0039ff7a"><td class="memItemLeft" align="right" valign="top"><a id="a667124dbe39766b903391c6b0039ff7a"></a>
+const <a class="el" href="class_symbol_table.html">SymbolTable</a>&#160;</td><td class="memItemRight" valign="bottom"><b>symbolTable</b></td></tr>
+<tr class="separator:a667124dbe39766b903391c6b0039ff7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of calculator that uses recursive parser. </p>
@@ -109,8 +119,9 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>eval</b> (const cha
 E = T ([+|-] T)*
 T = F ([*|/] F)*
 F = P (^ P)*
-P = '(' E ')' | N
+P = '(' E ')' | N | ID '(' E ')'
 N = [0-9]+
+ID = [a-zA-Z]+
 </pre> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

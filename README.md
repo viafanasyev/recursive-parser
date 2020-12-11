@@ -3,8 +3,8 @@
 ## Project description
 
 This program is developed as a part of ISP RAS course.  
-This program can parse and evaluate mathematical expressions with braces and next operations: `+`, `-`, `*`, `/`, `^`.  
-Note that `^` operator is right-associative.
+This program can parse and evaluate mathematical expressions with braces and next operations: `+`, `-`, `*`, `/`, `^`, `sin`, `cos`, `tg`, `ctg`, `ln`.  
+Note: `^` operator is right-associative, function arguments should be written in parentheses.
 
 ### Structure
 
@@ -28,7 +28,7 @@ Note that `^` operator is right-associative.
 To calculate mathematical expression execute next commands in terminal:
 ```shell script
 cmake . && make
-./eval "20 + 30 - 10 * (4 + 3 * 7)"
+./eval "sin(1/2)^2 + cos(1/2)^2"
 ```
 
 #### Tests

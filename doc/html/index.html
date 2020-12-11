@@ -68,8 +68,8 @@ $(function() {
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
 Project description</h1>
 <p>This program is developed as a part of ISP RAS course. <br  />
- This program can parse and evaluate mathematical expressions with braces and next operations: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>. <br  />
- Note that <code>^</code> operator is right-associative.</p>
+ This program can parse and evaluate mathematical expressions with braces and next operations: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>sin</code>, <code>cos</code>, <code>tg</code>, <code>ctg</code>, <code>ln</code>. <br  />
+ Note: <code>^</code> operator is right-associative, function arguments should be written in parentheses.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Structure</h2>
 <ul>
@@ -92,7 +92,7 @@ Run</h2>
 <h3><a class="anchor" id="autotoc_md4"></a>
 Calculator</h3>
 <p>To calculate mathematical expression execute next commands in terminal: </p><div class="fragment"><div class="line">cmake . &amp;&amp; make</div>
-<div class="line">./eval &quot;20 + 30 - 10 * (4 + 3 * 7)&quot;</div>
+<div class="line">./eval &quot;sin(1/2)^2 + cos(1/2)^2&quot;</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
 Tests</h3>
 <p>To run tests execute next commands in terminal: </p><div class="fragment"><div class="line">cmake . &amp;&amp; make</div>

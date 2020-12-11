@@ -34,6 +34,16 @@ TEST(eval_correctExpression, complexExpressionWithPowerOperator) {
     ASSERT_DOUBLE_EQUALS(eval(expression), 50);
 }
 
+TEST(eval_correctExpression, simpleTrigonometricExpression) {
+    const char* expression = "sin(0)";
+    ASSERT_DOUBLE_EQUALS(eval(expression), 0);
+}
+
+TEST(eval_correctExpression, complexTrigonometricExpression) {
+    const char* expression = "sin(1/2)^2 + cos(1/2)^2";
+    ASSERT_DOUBLE_EQUALS(eval(expression), 1);
+}
+
 TEST(eval_invalidExpression, invalidNumberOfOpenBraces) {
     const char* expression = "(2 + 3 * 5";
     try {
@@ -91,5 +101,15 @@ TEST(eval_invalidExpression, variable) {
         ASSERT_TRUE(0);
     } catch (const SyntaxError& e) {
         ASSERT_EQUALS(e.at(), 4);
+    }
+}
+
+TEST(eval_invalidExpression, invalidFunctionName) {
+    const char* expression = "sinus(1/2)^2 + cosinus(1/2)^2";
+    try {
+        eval(expression);
+        ASSERT_TRUE(0);
+    } catch (const SyntaxError& e) {
+        ASSERT_EQUALS(e.at(), 0);
     }
 }
